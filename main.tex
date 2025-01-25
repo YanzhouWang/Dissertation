@@ -45,7 +45,7 @@
 
 %%%% ADDITIONAL PATHS and FILES
 \def\FigurePath{figures}                    % subdirectory for the figure files
-\def\BibFileName{thesis.bib}                % name of BibLaTeX-compatible bib file 
+\def\BibFileName{bibliography.bib}          % name of BibLaTeX-compatible bib file 
 
 
 \def\FontPackage{lmodern}                   % default font package
@@ -158,12 +158,12 @@
 
 %%%% COMMON MATH PACKAGES
 \usepackage{amsfonts,amssymb,amsmath,amsthm,autobreak,
-    cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx,upgreek}
+    cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx}
 
 
 %%%% TABLE-RELATED PACKAGES
 \usepackage{booktabs,longtable,dcolumn,makecell,
-    multicol,multirow,tabularx,xltabular,rotating}
+    multicol,multirow,tabularx,rotating}
 
 
 %%%% package for micro-typography (you can define more settings)
@@ -174,16 +174,16 @@
 
 %%%% BIBLIOGRAPHIC PACKAGE (change the style or other options if you need to)
 %% Nature style bibliography
-\usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
-     date=year, isbn=false, url=false, doi=true]{biblatex}
+% \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
+%      date=year, isbn=false, url=false, doi=true]{biblatex}
 
 %% APA style
 % \usepackage[backend=biber, defernumbers=true, style=apa, maxnames=99,
 %     isbn=false, url=false, doi=true]{biblatex}
 
 %% IEEE style
-% \usepackage[backend=biber,style=ieee,defernumbers=true,maxnames=99, 
-%     date=year, isbn=false, url=false, doi=true]{biblatex}
+\usepackage[backend=biber,style=ieee,defernumbers=true,maxnames=99, 
+    date=year, isbn=false, url=false, doi=true]{biblatex}
 
 
 
@@ -554,7 +554,7 @@
 
 
 %%%% TITLE PAGE
-\include{01-title}        
+\include{title}        
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -569,13 +569,12 @@
 
 
 %%%% MUST ADD ABSTRACT (includes committee as well)
-\include{02-abstract}
+\include{abstract}
 
 
 %%%% OPTIONAL but COMMON: preface chapters
-\include{03-dedication}
-\include{04-acknowledgement}        
-% \include{05-epigraph}
+\include{dedication}
+\include{acknowledgement}        
 %% you can have other chapters and the order does not matter
 
 
@@ -607,11 +606,11 @@
 
 
 %%%% include all the main text chapters
-\include{06-chapter-1}
-\include{07-chapter-2}
-\include{08-chapter-3}
-\include{09-chapter-4}
-\include{10-chapter-5}
+\include{chapter-1}
+\include{chapter-2}
+\include{chapter-3}
+\include{chapter-4}
+\include{chapter-5}
 
 %% add more main text technical chapters if you have
 
@@ -635,8 +634,8 @@
 \fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
 
 
-\include{11-appendix-A}
-\include{12-appendix-B}
+\include{appendix-A}
+\include{appendix-B}
 
 %% add more appendix chapters if you have 
 
