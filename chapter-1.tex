@@ -1,9 +1,62 @@
-\chapter{Introduction} \label{chap:chap-1}
+\chapter{Background and Motivation} \label{chap:chap-1}
 
 % if you want a short header you can use the following command
 % \chapter[short-header-name]{chapter-title} \label{chap:chap-1}
 
+\section{Image-guided Percutaneous Interventions}
+\label{sec:image-guided-percutanous-interventions}
+\alert{spinal injections, prostate brachytherapy, kidney biopsy}
 
+\alert{challenges: 1. radiation exposure; 2. mental correlation; 3. experience-based techniques}
+
+\section{Image-guided Needle Positioning Robots}
+\label{sec:image-guided-needle-positioning-robots}
+\alert{Goal: aims to reduce radiation exposure and reduce reliance on mental correlation}
+
+\alert{Challenges: path deviation upon skin contact}
+
+\alert{Question: Model? Control? Feedback?}
+
+\alert{(list medical robots for positioning needles under imaging guidance. Main theme: positioning can be easily automated, but insertion is not)}
+
+\section{Steering of Hyper-flexible Bevel-tip Needles}
+\label{sec:steering-of-hyperflexible-bevel-tip-needles}
+
+\alert{Assumption -> Model -> Control}
+
+\alert{Drawbacks: 1. cannot use commercially available needles; 2. buckling; 3. Modes of needle adjustment are limited to rotation}
+
+\section{Mechanics-based Models}
+\label{sec:mechanics-based-models}
+
+\alert{Tissue deformation modeling -> how do you track?}
+
+\alert{obtaining tissue parameters?}
+
+\alert{speed of solution?}
+
+\alert{planning and control: energy-based + resolved-rate base manipulation}
+
+\alert{image-based feedback for needle shape reconstruction: modality-dependent, does not reduce reliance on imaging}
+
+\section{Contribution}
+\label{sec:contribution}
+
+This work details our approach for autonomous flexible needle manipulations for percutaneous interventions without specificity of imaging modality used. Inspired from freehand needle manipulations in clinical practice, this work takes a model-first approach to understand the intricate interactions between a flexible needle and surrounding soft tissues, and generates physics-informed needle manipulations based on high-speed model simulation. Specifically, the contribution of this work includes
+\begin{enumerate}[label*=\arabic*.]
+\item A needle-tissue interaction model that captures multilayered soft tissue environment, recreates strain-hardening soft tissue behaviors, and allows multi-modal, image-agnostic feedback for needle shape reconstruction.
+\item A model simulation that generates model solution using nonlinear finite element routine at interactive rate, captures a variety of needle tip geometries (e.g. symmetric, asymmetric, and active), and allows generic needle shape manipulation inputs that go beyond base manipulation.
+\item An in-depth investigation into simulation-driven control and feedback methods, including resolved-rate control for base manipulation with symmetric-tip needles and with sparse strain feedback for needle shape reconstruction, a comparison of Broyden's update versus finite difference methods for obtaing system Jacobian to manipulate the shape of bevel-tip needles, and trajectory planning using cross-entropy optimization and tracking using a hybrid model predictive controller with sparse needle position feedback.
+\end{enumerate}
+
+  The rest of the dissertation is structured as follows:
+  \begin{itemize}
+  \item Chapter 2 lays out the foundation of the work by studying the role of a robot RCM constraint in percutaneous needle interventions.
+  \item Chapter 3 examines needle base manipulations of symmetric-tip needles.
+  \item Chapter 4 examines needle shape manipulation of bevel-tip needles.
+  \item Chapter 5 addresses planning and tracking methods for needle shape manipulations.
+  \item Chapter 6 offers concluding remarks.
+  \end{itemize}
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

@@ -194,7 +194,6 @@
 \usepackage{blindtext}                      % to generate random filler texts
 \usepackage{calc}                           % to set arithmetic arguments for spacing
 \usepackage{caption}                        % to manage captions
-\usepackage{comment}                        % to comment a large amount of text as env
 \usepackage{epigraph,varwidth}              % for managing quotes
 \usepackage{enumitem}                       % to manage list environment
 \usepackage{float}                          % to manage floating environment
@@ -224,6 +223,9 @@
 \usepackage{tikz}                           % drawing related package
 \usepackage{subcaption}                     % individual panel and caption
 
+\usepackage{easyReview}
+\usepackage{import}
+\usepackage{cleveref}
 %% add more packages and/or change options of the packages as needed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END LaTeX PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -460,8 +462,10 @@
 }
 
 %%%% IN-TEXT MACROS for own notes (you can define more)
-\newcommand{\COMMENT}{\textcolor{red}}
-\newcommand{\ADDCITATION}{\COMMENT{(ADD CITATION)}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END OTHER MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -611,6 +615,7 @@
 \include{chapter-3}
 \include{chapter-4}
 \include{chapter-5}
+\include{chapter-6}
 
 %% add more main text technical chapters if you have
 
@@ -623,7 +628,7 @@
 %%%% BIBLIOGRAPHIC REFERENCES
 \BibTextSpacing                         % text spacing for each bib item
 \fancyhead[L]{\nouppercase \leftmark}
-\printbibliography[title={Bibliographic references},
+\printbibliography[title={Bibliographic References},
     heading=bibintoc, notcategory=mypapers]
 \clearpage                              % flushes out floating header
 
