@@ -189,7 +189,7 @@
 
 %%%% OTHER PACKAGES AND OPTIONS
 \usepackage[pagewise,mathlines]{lineno}     % line numbers for drafting
-\usepackage[ruled]{algorithm2e}             % to manage algorithm environment
+% \usepackage[ruled]{algorithm2e}             % to manage algorithm environment
 \usepackage[titletoc]{appendix}             % to manage appendix chapters
 \usepackage{blindtext}                      % to generate random filler texts
 \usepackage{calc}                           % to set arithmetic arguments for spacing
@@ -221,11 +221,14 @@
 \usepackage[final]{pdfpages}                % to insert pdf pages
 \usepackage{parskip}                        % default spacing around environments
 \usepackage{tikz}                           % drawing related package
-\usepackage{subcaption}                     % individual panel and caption
 
+\usepackage{subcaption}  \newlength{\twosubht} \newsavebox{\twosubbox} 
 \usepackage{easyReview}
 \usepackage{import}
 \usepackage{cleveref}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{diagbox}
 %% add more packages and/or change options of the packages as needed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END LaTeX PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -463,9 +466,11 @@
 
 %%%% IN-TEXT MACROS for own notes (you can define more)
 
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\proj}{proj} 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
-
+\DeclareMathOperator{\atantwo}{atan2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END OTHER MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

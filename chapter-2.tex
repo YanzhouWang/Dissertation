@@ -1,5 +1,12 @@
 \chapter{Robot RCM for Percutaneous Needle Interventions} \label{chap:chap-2}
 
+\section{Chapter Overview}
+\label{sec:chap-2-overview}
+
+The current chapter is based on
+
+\parencite{wangSafeSituNeedle2021}: Wang, Y., Li, G., Kwok, K., Cleary, K., Taylor, R. H., \& Iordachita, I. (2021). Towards Safe In Situ Needle Manipulation for Robot Assisted Lumbar Injection in Interventional MRI. Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems. IEEE/RSJ International Conference on Intelligent Robots and  Systems, 2021, 1835–1842.
+
 \section{Introduction}
 \label{sec:chap-2-introduction}
 
@@ -15,7 +22,7 @@ For typical laparoscopic surgeries, the RCM is placed about the tool entry point
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.65\columnwidth]{figures/rcm_vs_com.png}
+  \includegraphics[width=0.65\columnwidth]{figures/rcm/rcm_vs_com.png}
   \caption{Needle base translation and rotation naturally forms a (virtual) remote center of motion (RCM), yet due to inherent flexibility of the partially embedded needle, needle deforms and forms a separate center of motion (COM). Without interaction with soft tissue, these two centers coincide.}
   \label{fig:rcm-vs-com}
 \end{figure}
@@ -80,7 +87,7 @@ External input, such as digital signals from a joystick controller, is supported
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width = \textwidth]{figures/needle_tissue_rcm.png}
+  \includegraphics[width = \textwidth]{figures/rcm/needle_tissue_rcm.png}
   \caption{A planar view of virtual RCM motion of a needle inserted into an $N$-layer medium. The top and bottom stage displacements enforce the virtual RCM constraint ($m_2$ and $k_b$). The needle displaces the medium, generating an unknown reactive force distribution $F(x)$, which consists of normal force and friction force exerted by the medium. The mediums are modeled as a parallel arrangement of virtual springs, each with spring constants $k_i$ and friction coefficients $\gamma_i$. Along the inserted depth $l$, each spring is attached at end node of needle segment of length $l/n$. The reactive force deflects the needle to some shape $u(x)$, and causing the needle to intersect the $x$-axis at the instant center of motion (COM) where zero net displacement occurs.}
   \label{fig:needle_tissue_rcm}
 \end{figure*}
@@ -246,13 +253,13 @@ According to~\parencite{urreaEvaluationFrictionCoefficient2016}, the average dyn
 \end{equation}
 where $S_{com}$ is a vector of simulated COM positions, and $E_{com}$ is a vector of experimental COM positions found in~\cref{sec:chap-2-com-and-force}.
 
-By minimizing the COM differences across all five virtual RCM locations, the parameter values for the gel phantom with 34 Shore OO hardness reading is $k_{34} = 1.6889$N/m and $n_{34} = 1.1840$, while $k_{41} = 4.1484$N/m with $n_{41} = 2.1977$ for the 41 Shore OO hardness gel. Normed differences between $E_{com}$ and $S_{com}$ are $0.72mm$ and $0.82mm$, respectively. Simulated needle shapes are shown in Figure~\ref{fig:T1T2_sim}, and the corresponding simulated COM points are reported in~\cref{tab:COM_pos_table}.
+By minimizing the COM differences across all five virtual RCM locations, the parameter values for the gel phantom with 34 Shore OO hardness reading is $k_{34} = 1.6889$ N/m and $n_{34} = 1.1840$, while $k_{41} = 4.1484$ N/m with $n_{41} = 2.1977$ for the 41 Shore OO hardness gel. Normed differences between $E_{com}$ and $S_{com}$ are $0.72$ mm and $0.82$ mm, respectively. Simulated needle shapes are shown in Figure~\ref{fig:T1T2_sim}, and the corresponding simulated COM points are reported in~\cref{tab:COM_pos_table}.
 
 Note that a non-integer $n$ implies that there are $(\lfloor n \rfloor + 1)$ linear springs attached $l/n$ apart from each other along the needle, with the first spring attached at the top gel surface where the needle first contacts the gel.
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width = \columnwidth]{figures/T1T2_sim.png}
+  \includegraphics[width = \columnwidth]{figures/rcm/T1T2_sim.png}
   \caption{Simulation of the proposed needle-tissue interaction model with fixed $m_2 = 10$. Needle deflection with five different virtual RCM locations are compared when the needle is inserted into two types of tissues. The virtual RCM locations are marked in circles, and the corresponding needle deflection shapes are plotted in the same color. The instant COM points are the intersections of the needle shape with the $x$-axis.}
   \label{fig:T1T2_sim}
 \end{figure}
