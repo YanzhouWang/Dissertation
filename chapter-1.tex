@@ -1,13 +1,22 @@
 \chapter{Background and Motivation} \label{chap:chap-1}
 
-% if you want a short header you can use the following command
-% \chapter[short-header-name]{chapter-title} \label{chap:chap-1}
-
 \section{Image-guided Percutaneous Interventions}
 \label{sec:image-guided-percutanous-interventions}
-\alert{spinal injections, prostate brachytherapy, kidney biopsy}
 
-\alert{challenges: 1. radiation exposure; 2. mental correlation; 3. experience-based techniques}
+Percutaneous needle interventions capture a broad class of minimally invasive diagnosis and treatment procedures, such as biopsy~\parencite{bourgouinImageGuidedPercutaneousLung2021, birginCoreNeedleBiopsy2020, shethSocietyInterventionalRadiology2020, wuComplicationsCTGuidedPercutaneous2011}, brachytherapy~\parencite{chargariBrachytherapyOverviewClinicians2019, ragdeModernProstateBrachytherapy2000, wanBrachytherapyNeedleDeflection2005, podderVivoMotionForce2006}, and spinal injection~\parencite{wonFacetJointInjections2020,manchikantiEpiduralInterventionsManagement2021, carassitiEpiduralSteroidInjections2021, silbergleitImagingguidedInjectionTechniques2001}.
+
+Depending on the clinical procedure, a wide range of needles with different gauges, stiffness, and tip geometries are available. These inherent needle characteristics play a crucial role in determining how the needle moves through biological soft tissues; additionally, surgeons also employ various freehand techniques, such as rotating or bending the needle, to adjust the needle tip position \textit{in situ} during insertion~\parencite{calthorpeHistorySpinalNeedles2004,tsenNeedlesUsedSpinal2006,fritzAugmentedRealityVisualization2012}.
+
+Despite the prevalent use of intraoperative medical imaging as a way of visual feedback to the clinicians, successful placement of the flexible needle using freehand techniques is still challenging. As an example, for a standard ultrasound-guided 12-core prostate biopsy, false negative rate still exceeds 30\% -- a problem that persists even with repeated interventions~\parencite{serefogluHowReliable12Core2013}. This issue is compounded by inherent undersampling, which emphasizes the need for precise placement of the biopsy needle to effectively mitigate diagnostic challenges~\parencite{prestiProstateBiopsyCurrent2007}.
+
+Additionally, complications due to imprecise needle insertion can be damaging and even life threatening. For example, during CT-guided percutaneous needle biopsy of the chest, if the tip of biopsy needle is lodged in pulmonary vein and inner stylet is removed, air embolism can occur during rapid inspiration when atmospheric pressure exceeds pulmonary venous pressure~\parencite{wuComplicationsCTGuidedPercutaneous2011}. During fluoroscopy-guided intra-articular spinal injection procedures, the needle can go past the intended target and into the spinal cord, resulting in high spinal anesthesia~\parencite{bogdukComplicationsSpinalDiagnostic2008}.
+
+In general, image-guided percutaneous needle interventions are minimally invasive, but patient outcomes correlate directly to the accuracy of needle placement. Here, we highlight the following challenges:
+\begin{enumerate}
+\item Frequency of image acquisition and exposure to ionizing radiation.
+\item Accuracy of image interpretation and mental correlation with needle in hand.
+\item Experience-based freehand maneuvers.
+\end{enumerate}
 
 \section{Image-guided Needle Positioning Robots}
 \label{sec:image-guided-needle-positioning-robots}
@@ -18,6 +27,9 @@
 \alert{Question: Model? Control? Feedback?}
 
 \alert{(list medical robots for positioning needles under imaging guidance. Main theme: positioning can be easily automated, but insertion is not)}
+
+
+
 
 \section{Steering of Hyper-flexible Bevel-tip Needles}
 \label{sec:steering-of-hyperflexible-bevel-tip-needles}
@@ -49,14 +61,8 @@ This work details our approach for autonomous flexible needle manipulations for 
 \item An in-depth investigation into simulation-driven control and feedback methods, including resolved-rate control for base manipulation with symmetric-tip needles and with sparse strain feedback for needle shape reconstruction, a comparison of Broyden's update versus finite difference methods for obtaing system Jacobian to manipulate the shape of bevel-tip needles, and trajectory planning using cross-entropy optimization and tracking using a hybrid model predictive controller with sparse needle position feedback.
 \end{enumerate}
 
-  The rest of the dissertation is structured as follows:
-  \begin{itemize}
-  \item Chapter 2 lays out the foundation of the work by studying the role of a robot RCM constraint in percutaneous needle interventions.
-  \item Chapter 3 examines needle base manipulations of symmetric-tip needles.
-  \item Chapter 4 examines needle shape manipulation of bevel-tip needles.
-  \item Chapter 5 addresses planning and tracking methods for needle shape manipulations.
-  \item Chapter 6 offers concluding remarks.
-  \end{itemize}
+ The rest of the dissertation is structured as follows: Chapter 2 lays out the foundation of the work by studying the role of a robot RCM constraint in percutaneous needle interventions. Chapter 3 examines needle base manipulations of symmetric-tip needles. Chapter 4 examines needle shape manipulation of bevel-tip needles. Chapter 5 addresses planning and tracking methods for needle shape manipulations. Chapter 6 offers concluding remarks.
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

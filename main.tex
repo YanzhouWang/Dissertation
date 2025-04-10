@@ -45,8 +45,9 @@
 
 %%%% ADDITIONAL PATHS and FILES
 \def\FigurePath{figures}                    % subdirectory for the figure files
-\def\BibFileName{bibliography.bib}          % name of BibLaTeX-compatible bib file 
-
+% \def\BibFileName{bibliography.bib}
+% name of BibLaTeX-compatible bib file 
+\def\BibFileName{auto_bibliography.bib}
 
 \def\FontPackage{lmodern}                   % default font package
 
@@ -157,8 +158,8 @@
 
 
 %%%% COMMON MATH PACKAGES
-\usepackage{amsfonts,amssymb,amsmath,amsthm,autobreak,
-    cancel,dsfont,mathtools,mathbbol,mathrsfs,siunitx}
+\usepackage{amssymb,amsmath,amsthm,autobreak,
+    cancel,mathtools,mathrsfs,siunitx}
 
 
 %%%% TABLE-RELATED PACKAGES
@@ -465,13 +466,14 @@
 }
 
 %%%% IN-TEXT MACROS for own notes (you can define more)
-
+\newcommand{\mc}{\mathcal}
+\newcommand{\mb}{\mathbb}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\proj}{proj} 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator{\atantwo}{atan2}
-
+\DeclareMathOperator{\sign}{sign}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% END OTHER MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -645,7 +647,6 @@
 
 
 \include{appendix-A}
-\include{appendix-B}
 
 %% add more appendix chapters if you have 
 

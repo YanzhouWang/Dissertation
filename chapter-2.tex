@@ -10,11 +10,11 @@ The current chapter is based on
 \section{Introduction}
 \label{sec:chap-2-introduction}
 
-Needle insertion is often a necessary step in minimally invasive procedures, during which a hypodermic needle is inserted into the human body for diagnosis or treatment. One such application is lumbar injection therapy, in which a needle is guided into the lumbar spinal region, such as facet joints or the epidural space, and medication is injected to provide further diagnosis or give immediate pain relief. During the procedure, the physician advances a spinal needle and injects diagnostic or therapeutic agent once the needle reaches the anatomical target~\parencite{silbergleit2001imaging}. Intraoperative imaging, such as fluoroscopy and computed tomography (CT), is routinely used as visual feedback to the physician due to their wide availability; however, ionizing radiation exposure puts both the patients and the physicians at higher risk of developing cancer, albeit the presence of dose-reducing measures~\parencite{giordanoCervicalSpineImaging2008, ,leeMeasurementsSurgeonsExposure2012}. Spinal needles are typically made from stainless steel and are sized with diameter of 18 gauge (1.02mm) or smaller~\parencite{silbergleit2001imaging,calthorpeHistorySpinalNeedles2004,tsenNeedlesUsedSpinal2006}, making them flexible and subject to shape deformation.
+Needle insertion is often a necessary step in minimally invasive procedures, during which a hypodermic needle is inserted into the human body for diagnosis or treatment. One such application is lumbar injection therapy, in which a needle is guided into the lumbar spinal region, such as facet joints or the epidural space, and medication is injected to provide further diagnosis or give immediate pain relief. During the procedure, the physician advances a spinal needle and injects diagnostic or therapeutic agent once the needle reaches the anatomical target~\parencite{silbergleitImagingguidedInjectionTechniques2001}. Intraoperative imaging, such as fluoroscopy and computed tomography (CT), is routinely used as visual feedback to the physician due to their wide availability; however, ionizing radiation exposure puts both the patients and the physicians at higher risk of developing cancer, albeit the presence of dose-reducing measures~\parencite{giordanoCervicalSpineImaging2008,leeMeasurementsSurgeonsExposure2012}. Spinal needles are typically made from stainless steel and are sized with diameter of 18 gauge (1.02mm) or smaller~\parencite{silbergleitImagingguidedInjectionTechniques2001,calthorpeHistorySpinalNeedles2004,tsenNeedlesUsedSpinal2006}, making them flexible and subject to shape deformation.
 
 Many spinal injection procedures require targeting of submillimeter nerves and thin anatomical spaces. Common targets are often surrounded by vulnerable structures such as major arteries and veins, increasing the chance of complications due to needle misplacement~\parencite{bogdukComplicationsSpinalDiagnostic2008}. Difficulties in accessing and visualizing these regions of human body necessitate the highest spatial and contrast image resolution and image guidance accuracy to ensure accurate and safe drug delivery, which is best provided by magnetic resonance imaging (MRI).
 
-The idea of robot-assisted needle insertions under imaging guidance has been explored since early 2000s, and plenty of systems have been developed that can operate within the MR environment. For instance, Susil et al. developed an MR-compatible transrectal system to perform MRI-guided prostate biopsy procedures~\parencite{susilSystemMRImage2003, ,susilSystemProstateBrachytherapy2004}, and the device was further improved by Krieger et al.~\parencite{kriegerDesignNovelMRI2005}. This remotely actuated manipulator was able to place the needle tip to less than 2.3 mm from the target. Fischer et al. developed a pneumatically actuated needle placement device for real-time MRI-guided  transperineal prostate interventions~\parencite{fischerMRICompatiblePneumaticRobot2008}. Patel et al. designed a patient-mounted, 4 degree-of-freedom (DOF) robot actuated by piezoelectric motors for MRI-guided shoulder arthrography~\parencite{patelRoboticSystemMRIguided2018}. Wu et al. designed a remotely actuated needle driving device that allows clinician to manually steer and insert the needle away from the scanner bore~\parencite{wuRemotelyActuatedNeedle2019}, and is incorporated into a 6-DOF robot for MRI-guided low back pain injection procedures~\parencite{liFullyActuatedBodyMounted2020a}.
+The idea of robot-assisted needle insertions under imaging guidance has been explored since early 2000s, and plenty of systems have been developed that can operate within the MR environment. For instance, Susil et al. developed an MR-compatible transrectal system to perform MRI-guided prostate biopsy procedures~\parencite{susilSystemMRImage2003,susilSystemProstateBrachytherapy2004}, and the device was further improved by Krieger et al.~\parencite{kriegerDesignNovelMRI2005}. This remotely actuated manipulator was able to place the needle tip to less than 2.3 mm from the target. Fischer et al. developed a pneumatically actuated needle placement device for real-time MRI-guided  transperineal prostate interventions~\parencite{fischerMRICompatiblePneumaticRobot2008}. Patel et al. designed a patient-mounted, 4 degree-of-freedom (DOF) robot actuated by piezoelectric motors for MRI-guided shoulder arthrography~\parencite{patelRoboticSystemMRIguided2018}. Wu et al. designed a remotely actuated needle driving device that allows clinician to manually steer and insert the needle away from the scanner bore~\parencite{wuRemotelyActuatedNeedle2019}, and is incorporated into a 6-DOF robot for MRI-guided low back pain injection procedures~\parencite{liFullyActuatedBodyMounted2020a}.
 
 Among these MR-compatible robotic systems, there are a few that have deliberate kinematic constraints to limit the robot motions in order to achieve a specific motion trajectory. Stoianovici et al. developed an MR-Safe robotic system that employs a parallelogram-type mechanism to physically enforce an RCM below the needle guide, and was able to achieve high structural stiffness and targeting accuracy~\parencite{stoianoviciMultiImagerCompatibleMR2018}. Song et al. prototyped a double-ring RCM mechanism for MRI-guided liver interventions, though the value of this device which requires complete manual input for targeting and enforces an RCM constraint in its design was not justified in their study~\parencite{songDesignEvaluationDouble2013}.
 
@@ -29,7 +29,7 @@ For typical laparoscopic surgeries, the RCM is placed about the tool entry point
 
 Yet the notion of an RCM is not completely irrelevant to needle-based procedures. For image-guided spinal injections, when a needle is misplaced, physicians would adjust the inserted needle by bending and laterally translating the needle base, and with the help of the reactive force generated by the soft tissue, they are able to pivot the needle tip onto a better trajectory~\parencite{fritzAugmentedRealityVisualization2012}. Such needle maneuver will not affect the target locations, which are encapsulated by the vertebrae. This needle manipulation roughly resembles a needle base rotational motion about a remote center, and the presence of a virtual RCM can be presumed, albeit at an unspecified location.
 
-As an initial attempt to study the effect of this freehand needle manipulation and evaluate the possibility of enabling this motion on a robotic device in a safe manner, this paper 1) parameterizes and replicates such motion by introducing a virtual RCM constraint to our existing platform, 2) models and examines the needle deflection profile in a tissue phantom, 3) introduces the notion of needle instant center of motion (COM), and 4) evaluates robot motion parameters that affect force variations during this \textit{in situ} needle motion.
+As an initial attempt to study the effect of this freehand needle manipulation and evaluate the possibility of enabling this motion on a robotic device in a safe manner, this chapter 1) parameterizes and replicates such motion by introducing a virtual RCM constraint to our existing platform, 2) models and examines the needle deflection profile in a tissue phantom, 3) introduces the notion of needle instant center of motion (COM), and 4) evaluates robot motion parameters that affect force variations during this \textit{in situ} needle motion.
 
 \section{Materials and Methods}
 \label{sec:chap-2-material-and-methods}
@@ -37,7 +37,7 @@ As an initial attempt to study the effect of this freehand needle manipulation a
 \subsection{System Overview}
 \label{sec:chap-2-system-overview}
 
-\begin{figure}[tb]
+\begin{figure}[h]
   \centering
   \includegraphics[width = \columnwidth]{manuscripts/IROS_2021/figures/robot.eps}
   \caption{Overview of the PainBot system. The 4-DOF needle alignment module is attached to the cadaver torso. The 2-DOF needle driver module inserts and orients the needle based on manual inputs at the actuation unit. Image adapted from~\parencite{liFullyActuatedBodyMounted2020} with permission.}
@@ -49,6 +49,7 @@ As detailed in~\parencite{liFullyActuatedBodyMounted2020a,liFullyActuatedBodyMou
 A limitation in our previous clinical studies was the unmodeled needle-tissue behavior and the lack of direct haptic feedback. In particular, for facet joint injections, the needle often gets stuck inside of the fibrous tissue surrounding the joint capsule, in which case the clinician cannot successfully manipulate the needle using the two degrees of freedom provided by the needle driver; the only recourse is to retract the needle completely outside of the body and replan the trajectory, which prolongs the procedure and does not guarantee success in the following attempt.
 
 In freehand insertion procedures, clinicians would tilt and translate the needle in order to correct the misplaced needle tip~\parencite{fritzAugmentedRealityVisualization2012}. This motion largely ensembles needle rotation around a fixed point in 3D space, i.e. a motion constrained by a virtual RCM. By choosing different locations for this virtual RCM, various needle deflections could be achieved, resulting in different degrees of tissue compression and needle tip displacements.
+
 
 \subsection{Kinematics of Virtual RCM}
 \label{sec:chap-2-kinematics}
@@ -157,8 +158,8 @@ By completing the partial derivatives, the coefficients can be obtained by solvi
 \section{Results} 
 \label{sec:chap-2-results}
 
-\subsection{Virtual RCM Control} 
-\label{sec:chap-2-virtual-rcm-control}
+\subsection{Virtual RCM Implementation} 
+\label{sec:chap-2-virtual-rcm-implementation}
 
 % \begin{figure}[tb]
 %   \centering
@@ -281,7 +282,7 @@ For the pure translational motion, $A_{trans} = 287.44$ mm$^2$, while $A_{com} =
   \label{fig:trans_vs_com}
 \end{figure}
 
-\section{Discussion and Conclusion} 
+\section{Discussion} 
 \label{sec:chap-2-discussion-and-conclusion}
 Remote center of motion is commonly used in medical robotics for minimally invasive procedures; however, the implication between having an RCM and ``minimally invasive'' is subtle and highly dependent on the nature of the medical procedure. This paper has shown that for a flexible needle that has been inserted into the tissue, a virtual RCM is not the best indicator of a safe \textit{in situ} needle manipulation; rather, it is the needle center of motion --- COM --- that provides this information. 
 
