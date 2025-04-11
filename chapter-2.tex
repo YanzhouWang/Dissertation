@@ -275,7 +275,7 @@ Consider the case presented in~\cref{fig:trans_vs_com}. A needle tip relocation 
 \end{equation}
 For the pure translational motion, $A_{trans} = 287.44$ mm$^2$, while $A_{com} = 89.15$ mm$^2$ for the virtual RCM motion, which is less than its non-COM-inducing counterpart. With less amount of tissue displacement, the risk of tissue damage during needle tip relocation for the virtual RCM motion is lowered.
 
-\begin{figure}[tb]
+\begin{figure}[h]
   \centering
   \includegraphics[width = \columnwidth]{manuscripts/IROS_2021/figures/translation_vs_RCM.png}
   \caption{A simulated example comparing pure needle translation and COM-inducing virtual RCM motion to achieve the same needle tip relocation.}
@@ -296,7 +296,12 @@ In terms of modeling, simplification was made for the method to yield a linear s
 
 If an accurate model can be obtained in the lab environment, efforts will follow to further this research in an MRI facility, such as integrating fiber Bragg grating sensors into the needles for shape sensing, and building an MR-compatible joystick controller for virtual RCM robot control inside of the scanner room.
 
-In conclusion, a robot virtual RCM constraint can induce a needle COM upon which the needle pivots in the tissue. For operations such as robot assisted lumbar injections, the induced COM can result in less tissue displacement than its non-COM-inducing counterparts for a desired needle relocation, thus presents a safer alternative for \textit{in situ} needle manipulations during the procedure. 
+In conclusion, a robot virtual RCM constraint can induce a needle COM upon which the needle pivots in the tissue. For operations such as robot assisted lumbar injections, the induced COM can result in less tissue displacement than its non-COM-inducing counterparts for a desired needle relocation, thus presents a safer alternative for \textit{in situ} needle manipulations during the procedure.
+
+\section{Chapter Acknowledgment}
+\label{sec:chap-2-ack}
+
+I would like to thank Dr. Karun Sharma for providing insight regarding safe \textit{in situ} needle manipulations, as well as agreeing to the recording of his hand motion that produced~\cref{fig:rcm-vs-com}.
 
 %%% Local Variables:
 %%% mode: LaTeX

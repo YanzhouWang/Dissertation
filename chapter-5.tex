@@ -419,36 +419,57 @@ During offline planning, the planner generates optimal control trajectories with
   \label{fig:chap-5-white-noise-ori-use}
 \end{figure}
 
-\begin{table}[h]
-\centering
+\begin{table}[]
+  \centering
 \caption{Effect of different bias direction.}
 \label{tab:chap-5-dir-summary}
-\begin{tabular}{p{0.5cm}| p{0.4cm} | p{0.6cm} p{0.7cm} p{0.6cm} p{0.6cm} p{0.7cm} p{0.8cm}}
-\toprule
-Bias Dir. & Use Ori.&
-      $rmse$  & $rmse$ ($x_g$=60) & $std$ & $n_{flip}$ & failures  & failures ($x_g$=60) \\
-\midrule    
-\multirow{3}{*}{$+y$} 
-& F
-&  0.61 & 0.86  & 0.39 & 2.61  &  0.58\% & 2.50\% \\
-& T
-&  0.49 & 0.58  & 0.31 & 2.55  &  1.92\% & 9.58\% \\
 
-& \textbf{All}
-&  0.55 & 0.74  & 0.35 & 2.58  &  1.25\% & 6.04\% \\
-
-
-\midrule    
-\multirow{3}{0.65cm}{$-y$} 
-& F
-&  0.57 & 0.73  & 0.26 & 2.55  &  0.67\% & 2.50\% \\
-& T
-&  0.48 & 0.51  & 0.36 & 2.63  &  4.75\% & 23.8\% \\
-& \textbf{All}
-&  0.53 & 0.64  & 0.31 & 2.59  &  2.71\% & 13.1\% \\
-\bottomrule
+  \begin{tabular}{c|c|cccccc}
+    \toprule
+    \begin{tabular}[c]{@{}c@{}}Bias\\ Dir.\end{tabular} & \begin{tabular}[c]{@{}c@{}}Use\\ Ori.\end{tabular} & $rmse$ &
+                                                                                                                        \begin{tabular}[c]{@{}c@{}}$rmse$\\ ($x_g$=60)\end{tabular} & $std$ & $n_{flip}$ & failures & \begin{tabular}[c]{@{}c@{}}failures\\  ($x_g$=60)\end{tabular} \\
+    \midrule
+ & F & 0.61 & 0.86 & 0.39 & 2.61 & 0.58\% & 2.50\% \\
++$y$ & T & 0.49 & 0.58 & 0.31 & 2.55 & 1.92\% & 9.58\% \\
+                                                        & All & 0.55 & 0.74 & 0.35 & 2.58 & 1.25\% & 6.04\% \\
+    \midrule
+ & F & 0.57 & 0.73 & 0.26 & 2.55 & 0.67\% & 2.50\% \\
+-y & T & 0.48 & 0.51 & 0.36 & 2.63 & 4.75\% & 23.8\% \\
+                                                        & All & 0.53 & 0.64 & 0.31 & 2.59 & 2.71\% & 13.1\% \\
+    \bottomrule
 \end{tabular}
 \end{table}
+
+% \begin{table}[h]
+% \centering
+% \caption{Effect of different bias direction.}
+% \label{tab:chap-5-dir-summary}
+% \begin{tabular}{p{0.5cm}| p{0.4cm} | p{0.6cm} p{0.7cm} p{0.6cm} p{0.6cm} p{0.7cm} p{0.8cm}}
+% \toprule
+% Bias Dir. & Use Ori.&
+%       $rmse$  & $rmse$ ($x_g$=60) & $std$ & $n_{flip}$ & failures  & failures ($x_g$=60) \\
+% \midrule    
+% \multirow{3}{*}{$+y$} 
+% & F
+% &  0.61 & 0.86  & 0.39 & 2.61  &  0.58\% & 2.50\% \\
+% & T
+% &  0.49 & 0.58  & 0.31 & 2.55  &  1.92\% & 9.58\% \\
+
+% & \textbf{All}
+% &  0.55 & 0.74  & 0.35 & 2.58  &  1.25\% & 6.04\% \\
+
+
+% \midrule    
+% \multirow{3}{0.65cm}{$-y$} 
+% & F
+% &  0.57 & 0.73  & 0.26 & 2.55  &  0.67\% & 2.50\% \\
+% & T
+% &  0.48 & 0.51  & 0.36 & 2.63  &  4.75\% & 23.8\% \\
+% & \textbf{All}
+% &  0.53 & 0.64  & 0.31 & 2.59  &  2.71\% & 13.1\% \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
 
 An example of controller performance with zero-mean noise, or noise \textit{Level 1}, can be seen in~\cref{fig:chap-5-white-noise-ori-use}. When only using positional feedback, the controller performs better with targets that are more aligned with the needle, but struggles with deeper targets that require large needle deflection. This is in part due to the inability to independently control needle tip position and orientation given the set of control considered in the current work, and in part due to the path-dependent nature of needle insertion and the limitation of online tracking controller in terms of long-horizon trajectory prediction, as well as the diminishing effect of needle guide translation as the needle inserts deeper.
@@ -520,6 +541,11 @@ The choice of using EM tracking to provide a single position feedback places mor
 In tissue phantom experiments, values of tissue parameters are ``known'' a priori. Patient-specific, layer-by-layer parameter values can be difficult to obtain in a real surgical setting, but a good estimate of these values serves as a baseline for the simulation, and further sim-to-real discrepancies can be accounted for by controller feedback.
 
 Lastly, no physical obstacle is imposed in the tissue phantoms, even though obstacle avoidance capability is shown in simulation. For the insertion depths as well as controller inputs considered in current work, the ability to ``navigate'' around obstacles is limited, since inherently, needle tip motion is propagated by a needle continuum that is increasingly more constrained by surrounding soft tissues, and a large change in needle tip state necessitates a large needle guide motion, which in turn is dangerous to the patient. In an actual clinical setting, we highlight the need for choosing a suitable incision site and orientation such that a relatively obstacle-free path is obtained, and our control framework can be utilized to correct path deviation \textit{in situ}.
+
+\section{Chapter Acknowledgment}
+\label{sec:chap-5-ack}
+
+I would like to thank Junling Mei for her contribution on EM noise calibration and controller robustness experiments. I would like to thank Chang Chang for building the necessary hardware components, work on system integration as well as image registration workflow, as well as his help performing tissue phantom experiments.
 
 %%% Local Variables:
 %%% mode: latex
