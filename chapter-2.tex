@@ -3,9 +3,7 @@
 \section{Chapter Overview}
 \label{sec:chap-2-overview}
 
-The current chapter is based on
-
-\parencite{wangSafeSituNeedle2021}: Wang, Y., Li, G., Kwok, K., Cleary, K., Taylor, R. H., \& Iordachita, I. (2021). Towards Safe In Situ Needle Manipulation for Robot Assisted Lumbar Injection in Interventional MRI. Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems. IEEE/RSJ International Conference on Intelligent Robots and  Systems, 2021, 1835–1842.
+In medical robotics literature, the notion of a kinematic ``remote center of motion'' (RCM) constraint, whereby all motion of the instrument needs to revolve around such center, is prevalent. However, the term has often been used interchangeably with ``entry point'' for needle insertion robots. Unlike laparoscopic surgeries, the needle interacts with soft tissues not only at the entry point, but also everywhere through the depth of insertion, thus making the RCM design choice ill-informed. This chapter explores the role of such kinematic motion constraints in the context of percutaneous needle interventions, and how it can be useful for \textit{in situ} needle adjustments, provided that the interaction between needle and soft tissue is well understood.
 
 \section{Introduction}
 \label{sec:chap-2-introduction}
@@ -98,7 +96,7 @@ A mathematical model is desired to understand how the needle interacts with the 
 This preliminary model builds on a variation of the virtual spring approach which models the needle-tissue interaction as a linear beam supported by virtual springs~\parencite{glozmanImageGuidedRoboticFlexible2007,lehmannDeflectionModelingNeedle2017}. Considering small motion amplitudes and velocities, it is assumed that the virtual springs deflect within their linear elastic region, and viscous behavior is negligible. Without loss of generality, multiple types of springs can be incorporated in this model, each with spring constant $k_i$.
 During the virtual RCM motion, the needle needs to be inserted or retracted to keep the RCM constraint, therefore friction between the outer surface of the needle cannula and the tissue is present. The friction force is discretized to be concentrated at each spring attachment location, and the friction force is modeled as proportional to the normal force exerted at that point, with coefficient of friction $\gamma_i$.
 
-Taking a planar view of the needle lying horizontally, as shown in~\cref{fig:needle_tissue_rcm}, the needle deflection $v(x)$ is prescribed at the bottom stage. In addition, the virtual RCM constraint prescribes the incident slope at which the needle extends from the bottom stage. From the point of insertion to the needle tip, the needle cannula experiences axial forces by the deformed tissue, and also longitudinal forces caused by friction. Needle bending moment at the tip is taken as zero, and the needle tip's bevel shape is not taken into account.
+Taking a planar view of the needle lying horizontally, as shown in~\cref{fig:needle_tissue_rcm}, the needle deflection $u(x)$ is prescribed at the bottom stage. In addition, the virtual RCM constraint prescribes the incident slope at which the needle extends from the bottom stage. From the point of insertion to the needle tip, the needle cannula experiences axial forces by the deformed tissue, and also longitudinal forces caused by friction. Needle bending moment at the tip is taken as zero, and the needle tip's bevel shape is not taken into account.
 
 To solve for the needle deflection, system total potential energy is first formulated. Rayleigh-Ritz method is then used to find a candidate polynomial that satisfies all the boundary conditions. Finally, the principle of minimum potential energy is invoked to find the remaining constant coefficients in the candidate function, thus giving us the deflection function that extremizes system potential energy. 
 
@@ -300,6 +298,9 @@ In conclusion, a robot virtual RCM constraint can induce a needle COM upon which
 
 \section{Chapter Acknowledgment}
 \label{sec:chap-2-ack}
+The current chapter is based on
+
+\parencite{wangSafeSituNeedle2021}: Wang, Y., Li, G., Kwok, K., Cleary, K., Taylor, R. H., \& Iordachita, I. (2021). Towards Safe In Situ Needle Manipulation for Robot Assisted Lumbar Injection in Interventional MRI. Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems. IEEE/RSJ International Conference on Intelligent Robots and  Systems, 2021, 1835–1842.
 
 I would like to thank Dr. Karun Sharma for providing insight regarding safe \textit{in situ} needle manipulations, as well as agreeing to the recording of his hand motion that produced~\cref{fig:rcm-vs-com}.
 

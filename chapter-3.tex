@@ -3,14 +3,7 @@
 \section{Chapter Overview}
 \label{sec:chap-3-overview}
 
-The current chapter is based on
-
-\parencite{wangFlexibleNeedleBending2023}: Wang, Y., Kwok, K., Cleary, K., Taylor, R. H., \& Iordachita, I. (2023). Flexible Needle Bending Model for Spinal Injection Procedures. IEEE Robotics and Automation Letters, 8(3), 1343–1350.
-
-\parencite{wangSituFlexibleNeedle2023}: Wang, Y., Xu, Y., Kwok, K., \& Iordachita, I. (2023). In Situ Flexible Needle Adjustment Towards MRI-Guided Spinal Injections Based on Finite Element Simulation. In , 2023 International Symposium on Medical Robotics (ISMR) (pp. 1–7). Atlanta, GA, USA: IEEE.
-
-\parencite{wangSimulationbasedFlexibleNeedle2024}: Wang, Y., Xu, Y., Kang, J., Fritz, J., \& Iordachita, I. (2024). Simulation-based Flexible Needle Control with Single-core FBG Feedback for Spinal Injections. IEEE Transactions on Medical Robotics and Bionics, 6(3), 1073–1083. 
-
+This chapter expands upon previous discussion of needle base manipulation, and extends the preliminary model presented in~\cref{chap:chap-2}. Specifically, we present a needle-tissue interaction model that takes into account multilayered, nonlinear soft tissue environment during needle insertion, and a simulation environment that resolves such model at interactive rate. Using fiber Bragg grating optical strain feedback at sparse location along the needle, needle shape can be reconstructed in realtime. We also explore the use of resolved-rate control for symmetric-tip needle base manipulation, and presents a series of tissue phantom experiments to validate our approach.
 
 % \begin{itemize}
 % \item Model: RAL 2023
@@ -106,7 +99,7 @@ A stainless steel trocar needle of 1mm diameter is used in the experiment. Singl
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width = \columnwidth]{figures/base_manipulation/1/motion_schematic.png}
+  \includegraphics[width = 0.68\columnwidth]{figures/base_manipulation/1/motion_schematic.png}
   \caption{A top-down view of the needle base motion. When a lateral translation is applied, the inserted needle will bend and rotate freely about the passive rotary stage. The needle is allowed to freely translate in the axial direction so that the needle tip remains at the same insertion depth.}
   \label{fig:chap-3-motion-schematic}
 \end{figure}
@@ -745,6 +738,14 @@ Our proposed workflow for semi-autonomous needle insertion and manipulation (\cr
 
 \section{Chapter Acknowledgment}
 \label{sec:chap-3-ack}
+The current chapter is based on
+
+\parencite{wangFlexibleNeedleBending2023}: Wang, Y., Kwok, K., Cleary, K., Taylor, R. H., \& Iordachita, I. (2023). Flexible Needle Bending Model for Spinal Injection Procedures. IEEE Robotics and Automation Letters, 8(3), 1343–1350.
+
+\parencite{wangSituFlexibleNeedle2023}: Wang, Y., Xu, Y., Kwok, K., \& Iordachita, I. (2023). In Situ Flexible Needle Adjustment Towards MRI-Guided Spinal Injections Based on Finite Element Simulation. In , 2023 International Symposium on Medical Robotics (ISMR) (pp. 1–7). Atlanta, GA, USA: IEEE.
+
+\parencite{wangSimulationbasedFlexibleNeedle2024}: Wang, Y., Xu, Y., Kang, J., Fritz, J., \& Iordachita, I. (2024). Simulation-based Flexible Needle Control with Single-core FBG Feedback for Spinal Injections. IEEE Transactions on Medical Robotics and Bionics, 6(3), 1073–1083. 
+
 I would like to thank Lidia Al-Zogbi for her help making and testing the plastisol samples. I would like to thank Yangsheng Xu for his help with fabricating and calibrating the sensorized needle, as well as performing the experiments. I would like to thank Jiarong Kang for his help with calibrating the sensorized needle, and his input on~\cref{alg:chap-3-workflow}.
 
 %%% Local Variables:

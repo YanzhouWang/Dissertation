@@ -3,13 +3,7 @@
 \section{Chapter Overview}
 \label{sec:chap-5-overview}
 
-The current chapter is based on unpublished manuscripts
-
-\parencite{wangHighPrecisionAutonomousControl2025}: Wang, Y., Chang, C., Mei, J., Leonard, S., Taylor, R. H., \& Iordachita, I. (2025). High-Precision Autonomous Control of Flexible Needls via Realtime Finite Element Simulation and Cross-Entropy Optimization. 
-
-\parencite{meiEvaluationNeedleManipulation2025}: Mei, J., Chang, C., Wang, Y., Leonard, S., \& Iordachita, I. (2025). Evaluation of Needle Manipulation Controller Subject to Uncertainty of Tip Pose Feedback: A Simulation Study. In 2025 International Symposium on Medical Robotics.
-
-\parencite{changDesignEvaluationNeedle2025}: Chang, C., Mei, J., Wang, Y., Al-Zogbi, Lidia, Leonard, S., Jain, A., \& Iordachita, I. (2025). Design and Evaluation of a Needle Manipulation System with EM Tracking for CT-Guided Spinal Injections. In 2025 International Symposium on Medical Robotics.
+Previously, we highlight the shortcomings of resolved-rate controllers in manipulating the shape of bevel-tip needles, including the reliance on obtaining an invertible input-output Jacobian, the importance of a feasible needle path, as well as the challenges for controlling the bevel direction. Here, we present a simulation-driven framework for both trajectory planning and tracking of bevel-tip needles under shape manipulation using cross-entropy optimization. We use a single position feedback located at the needle tip to provide feedback during online tracking. Controller performance under tracking uncertainty is evaluated both in a simulated environment as well as using tissue phantoms.
 
 \section{Introduction}
 \label{sec:chap-5-introduction}
@@ -544,6 +538,14 @@ Lastly, no physical obstacle is imposed in the tissue phantoms, even though obst
 
 \section{Chapter Acknowledgment}
 \label{sec:chap-5-ack}
+
+The current chapter is based on unpublished manuscripts
+
+\parencite{wangHighPrecisionAutonomousControl2025}: Wang, Y., Chang, C., Mei, J., Leonard, S., Taylor, R. H., \& Iordachita, I. (2025). High-Precision Autonomous Control of Flexible Needls via Realtime Finite Element Simulation and Cross-Entropy Optimization. 
+
+\parencite{meiEvaluationNeedleManipulation2025}: Mei, J., Chang, C., Wang, Y., Leonard, S., \& Iordachita, I. (2025). Evaluation of Needle Manipulation Controller Subject to Uncertainty of Tip Pose Feedback: A Simulation Study. In 2025 International Symposium on Medical Robotics.
+
+\parencite{changDesignEvaluationNeedle2025}: Chang, C., Mei, J., Wang, Y., Al-Zogbi, Lidia, Leonard, S., Jain, A., \& Iordachita, I. (2025). Design and Evaluation of a Needle Manipulation System with EM Tracking for CT-Guided Spinal Injections. In 2025 International Symposium on Medical Robotics.
 
 I would like to thank Junling Mei for her contribution on EM noise evaluation and controller robustness experiments. I would like to thank Chang Chang for building the necessary hardware components, work on system integration as well as image registration workflow, as well as his help performing tissue phantom experiments.
 
