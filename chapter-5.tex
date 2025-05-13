@@ -509,14 +509,14 @@ The performance of the proposed needle manipulation strategy is evaluated based 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{manuscripts/RAL_2025/figures/em_error.png}
+  \includegraphics[width=\columnwidth]{figures/em_error/em_error.png}
   \caption{Tissue phantom experiment using plastisol and chicken breast tissue phantoms. Targets are the center of circles, which have radii of $1$ mm. Black dots show the needle tip positions reported by EM tracker after each insertion.}
   \label{fig:chap-5-em-error}
 \end{figure}
 
 Apart from imprecise knowledge of tissue parameters of the chicken breast, tissue deformation prior to needle penetration contributes to the increased difficulty in tracking the nominal plans. As an example,~\cref{fig:chap-5-single-result} shows the planning and tracking performance for a target at $[40, -5]$ mm. As shown in the highlighted region, path deviation develops immediately after the needle touches the chicken breast surface (denoted as $\text{Depth}=0$ mm), and the error continues to increase as the nominal control trajectory is followed. This agrees with our prior observation that initial path discrepancy can lead to increasingly erroneous insertions if not corrected. This highlights the fact that having a robot with high motion accuracy is only a necessary condition for accurate needle insertions; feedback and control algorithms informed by physical understanding of the surgical scenario is equally important. In this case, the controller can adjust the needle guide and bevel direction to bring the needle tip back to the planned trajectory.
 
-Note that while the planner avoids any \textit{in situ} bevel rotation by changing the bevel direction prior to contact, the bang-bang controller determines the actual optimal action based on the feedback from the EM sensor.
+\replaced[id=ii]{Note that the planner proactively rotates the needle's bevel direction before tissue contact to ensure the initial orientation aligns with the optimal insertion path. This preemptive adjustment avoids the need for \textit{in situ} rotation (which could cause tissue damage via a "drilling" effect), while the bang-bang controller later refines the trajectory in real-time using EM sensor feedback.}{Note that while the planner avoids any \textit{in situ} bevel rotation by changing the bevel direction prior to contact, the bang-bang controller determines the actual optimal action based on the feedback from the EM sensor.}
 
 \begin{figure}[h]
   \centering
@@ -534,7 +534,7 @@ The choice of using EM tracking to provide a single position feedback places mor
 
 In tissue phantom experiments, values of tissue parameters are ``known'' a priori. Patient-specific, layer-by-layer parameter values can be difficult to obtain in a real surgical setting, but a good estimate of these values serves as a baseline for the simulation, and further sim-to-real discrepancies can be accounted for by controller feedback.
 
-Lastly, no physical obstacle is imposed in the tissue phantoms, even though obstacle avoidance capability is shown in simulation. For the insertion depths as well as controller inputs considered in current work, the ability to ``navigate'' around obstacles is limited, since inherently, needle tip motion is propagated by a needle continuum that is increasingly more constrained by surrounding soft tissues, and a large change in needle tip state necessitates a large needle guide motion, which in turn is dangerous to the patient. In an actual clinical setting, we highlight the need for choosing a suitable incision site and orientation such that a relatively obstacle-free path is obtained, and our control framework can be utilized to correct path deviation \textit{in situ}.
+Lastly, no physical obstacle is \added[id=ii]{currently} imposed in the tissue phantoms, even though obstacle avoidance capability is shown in simulation. For the insertion depths as well as controller inputs considered in current work, the ability to ``navigate'' around obstacles is limited, since inherently, needle tip motion is propagated by a needle continuum that is increasingly more constrained by surrounding soft tissues, and a large change in needle tip state necessitates a large needle guide motion, which in turn is dangerous to the patient. In an actual clinical setting, we highlight the need for choosing a suitable incision site and orientation such that a relatively obstacle-free path is obtained, and our control framework can be utilized to correct path deviation \textit{in situ}.
 
 \section{Chapter Acknowledgment}
 \label{sec:chap-5-ack}
