@@ -8,7 +8,7 @@
 \section{Chapter Overview}
 \label{sec:chap-4-overview}
 
-Needle base manipulation is a special case of manipulation where inputs act entirely on the needle base, and they follow the needle base as the needle inserts. Needle \textit{shape} manipulation is more general, during which inputs can be place anywhere along the needle, and might or might not follow the needle as it goes into soft tissues. This chapter extends the model in~\cref{chap:chap-3} such that generic control inputs can be placed anywhere along the length of the needle, and that shape manipulation can be effectively taken into account. In addition, we augment the previous simulation to take into account asymmetric needle tip designs, and explore how resolved-rate control can lead to unsafe shape manipulations for bevel-tip needles in the absence of a planned path.
+Needle base manipulation is a special case of manipulation where inputs act entirely on the needle base, and they follow the needle base as the needle inserts. Needle \textit{shape} manipulation is more general, during which inputs can be place anywhere along the needle, and might or might not follow the needle as it goes into soft tissues. This chapter extends the model in~\cref{chap:chap-3} such that generic control inputs can be placed anywhere along the length of the needle, and that shape manipulation can be effectively taken into account. In addition, \replaced[id=ak]{I}{we} augment the previous simulation to take into account asymmetric needle tip designs, and explore how resolved-rate control can lead to unsafe shape manipulations for bevel-tip needles in the absence of a planned path.
 
 \section{Modeling of Needle Shape Manipulation}
 \label{sec:chap-4-model}
@@ -19,7 +19,7 @@ One way to account for the interaction between the needle's shaft and soft tissu
 
 Notably, work done on symmetric-tip needles is primarily focused on lateral base motion to achieve needle steering; on the other hand, bevel-tip needle steering is typically achieved only by changing the bevel orientation via axial rotation, while largely ignoring lateral motion of the needle. However, in reality, both lateral base motion and needle tip bevel can be used for steering, albeit with different working principles. Furthermore, a common feature of previous works is the use of largely simplified linear tissue behavior model. Biological soft tissues exhibit highly nonlinear stress-stretch behavior, which cannot be captured by such models~\parencite{humphreyIntroductionBiomechanicsSolids2025,singhMechanicalPropertiesWholebody2021}. The lack of a realistic tissue model also makes the choice of tissue linearity measure rather arbitrary. Adagolodjo~\textit{et al.} address tissue nonlinearity in symmetric needle insertions using the SOFA framework~\parencite{adagolodjoRoboticInsertionFlexible2019}, an open-source interactive finite element physics simulator designed to provide real-time computational capabilities~\parencite{faureSOFAMultiModelFramework2012, coevoetSoftwareToolkitModeling2017}. However, no model validation is provided in~\parencite{adagolodjoRoboticInsertionFlexible2019}; instead, the overall control system is evaluated, with model errors compensated for using high-frequency non-rigid tissue registration enabled by six Flex13 cameras, which is an unrealistic requirement in clinical settings.
 
-We present 1) a mechanics-based needle-tissue interaction model for bevel-tip needle insertion that accounts for nonlinear soft tissue behaviors and multi-layer scenarios, and 2) an interactive finite element simulation that allows full three-DOF planar control inputs to be placed anywhere along the needle, enabling the simulation of various clinical scenarios. We showcase the versatility of the model and simulation with soft tissue phantoms consisting of up to four different layers, as well as non-homogeneous chicken breast tissues.
+\replaced[id=ak]{I}{We} present 1) a mechanics-based needle-tissue interaction model for bevel-tip needle insertion that accounts for nonlinear soft tissue behaviors and multi-layer scenarios, and 2) an interactive finite element simulation that allows full three-DOF planar control inputs to be placed anywhere along the needle, enabling the simulation of various clinical scenarios. \replaced[id=ak]{I}{We} showcase the versatility of the model and simulation with soft tissue phantoms consisting of up to four different layers, as well as non-homogeneous chicken breast tissues.
 
 \subsection{Modeling and Simulation}
 \label{sec:chap-4-modeling-and-simulation}
@@ -35,11 +35,22 @@ The current simulation extends previous theoretical foundation~\parencite{wangFl
   \label{fig:chap-4-model-schematic}
 \end{figure}
 
-To simulate the needle's bevel effect during insertion, an offset $b$ is applied to new contact points created at the needle tip (see~\cref{fig:chap-4-model-schematic}). This offset can correlate to the tip bevel geometry, and effectively creates a ``pre-stretched spring'' whose reaction force is tissue-dependent. By resolving the needle bending formulation in the next simulation step, the resultant tip force generated by the offset is computationally incorporated into the model, allowing the needle tip to bend in the corresponding direction. By controlling the sign and magnitude of this offset, different bevel effects can be simulated, as shown in~\cref{fig:chap-3-model-schematic}. Active needles whose tip orientation is adjustable can also be simulated by changing the offset parameter online, although such use cases are not considered in the current study~\parencite{ryuFeasibilityStudyOptically2011,karimi3DSteerableActive2019,padasdaoShapeMemoryAlloy2020}.
+To simulate the needle's bevel effect during insertion, an offset $b$ is applied to new contact points created at the needle tip (see~\cref{fig:chap-4-model-schematic}\added[id=rt]{, detail view of the needle tip at Medium N}). This offset can correlate to the tip bevel geometry, and effectively creates a ``pre-stretched spring'' whose reaction force is tissue-dependent. By resolving the needle bending formulation in the next simulation step, the resultant tip force generated by the offset is computationally incorporated into the model, allowing the needle tip to bend in the corresponding direction. By controlling the sign and magnitude of this offset, different bevel effects can be simulated, as shown in~\cref{fig:chap-3-model-schematic}. Active needles whose tip orientation is adjustable can also be simulated by changing the offset parameter online, although such use cases are not considered in the current study~\parencite{ryuFeasibilityStudyOptically2011,karimi3DSteerableActive2019,padasdaoShapeMemoryAlloy2020}.
 
 Known coordinates of the needle points can be used as control points along the needle, and are treated as essential boundary conditions for their corresponding node. For example, the needle base can have a known configuration that is robotically controlled, and the needle shaft can be constrained to move through a template.
 
-To create an interactive simulation, we distinguish two types of user inputs: ``vertical'' $V$-input and ``horizontal'' $H$-input. $V$-input is a condition that directly affects the needle's shape, such as nodal lateral displacement or slope of a particular point on the needle, and is treated similarly to essential boundary conditions of the finite element solver. $H$-input pertains only to needle insertion and retraction, and this kinematic problem is solved independently from the beam-bending problem. 
+\added[id=rt]{To facilitate the explanation of our interactive simulator, meanings of variables used are summarized as follows:}
+\nomenclature{$H_{(\cdot)}^{(\cdot\cdot)}$, $V_{(\cdot)}^{(\cdot\cdot)}$}{The $(\cdot)th$ inputs to the needle at simulation step $(\cdot\cdot)$}
+\nomenclature{$\mathcal{W}, \mathcal{C}$}{World and contact frames}
+\nomenclature{$C$}{Contact point}
+\nomenclature{$N$}{Needle object}
+\nomenclature{$SE(2)$}{2D Special Euclidean group}
+\nomenclature{$x_{tip}, y_{tip}, \theta_{tip}$}{Needle tip $x, y$ and $\theta$ coordinates}
+\nomenclature{$\mathbf{T}_{(\cdot)}^{(\cdot\cdot)}$}{Rigid transformation from frame $(\cdot)$ to frame $(\cdot\cdot)$}
+\nomenclature{$\Omega_1$}{First tissue layer boundary}
+\printnomenclature[1.25in]
+
+\added[id=rt]{As shown in~\cref{fig:chap-4-model-schematic}, }to create an interactive simulation \added[id=rt]{that captures a variety of needle manipulations}, we distinguish two types of user inputs: ``vertical'' $V$-input and ``horizontal'' $H$-input. $V$-input is a condition that directly affects the needle's shape, such as nodal lateral displacement or slope of a particular point on the needle, and is treated similarly to essential boundary conditions of the finite element solver. $H$-input pertains only to needle insertion and retraction, and this kinematic problem is solved independently from the beam-bending problem. 
 
 As shown in Fig.~\ref{fig:chap-4-model-schematic}, the simulation is displayed in a world-fixed frame $\mathcal{W}$, while needle deformation is obtained in a dynamically formulated constraint frame $\mathcal{C}$. After initializing the needle shape ${}^{\mathcal{W}}N$ and soft tissue layers in $\mathcal{W}$, the simulation reads user inputs to update the needle configuration. When contact between the needle tip and tissue boundary is detected, the first contact point ${}^\mathcal{W}C^1 = [x_{tip}, y_{tip}, \theta_{tip}]^\top$ is placed at the needle tip, and two rigid-body transformations $\mathbf{T}_\mathcal{W}^\mathcal{C}$, $\mathbf{T}_\mathcal{C}^\mathcal{W}$ are defined, which are used to transform needle coordinates from frame $\mathcal{W}$ to $\mathcal{C}$ and vice versa. Within step $m$, after including $V_i^m$, the finite element solution is obtained in the $\mathcal{C}$ frame. The converged solution for the needle, ${}^\mathcal{C}N$, is then updated by $H_j^m$ to simulate needle insertion or retraction. A new contact point can be added with an offset $b$ such that in the next simulation iteration, the needle tip will experience a pulling force in the direction of the bevel, thus creating a bevel insertion effect. Updated needle shape and contact points are then transformed back to frame $\mathcal{W}$, where the simulation is visually updated. Dynamic formulation of contact points allows the needle to be inserted in any initial position and orientation. The simulation is written in MATLAB, and the workflow is shown in~\cref{alg:chap-4-workflow}.
 
@@ -58,7 +69,7 @@ As shown in Fig.~\ref{fig:chap-4-model-schematic}, the simulation is displayed i
     \If {$\PW C = \varnothing$ \algAnd $x_{tip} \in \Omega_1$}
       \State $\PW C^1 \Leftarrow [x_{tip}, y_{tip}, \theta_{tip}]^\top$
     \EndIf
-    \State [$\mathbf{T}_\mathcal{W}^\mathcal{C}, \mathbf{T}_\mathcal{C}^\mathcal{W}$] $\in SE(2)\Leftarrow$ \Call{get\_tf}{$\PW C_1$}
+    \State [$\mathbf{T}_\mathcal{W}^\mathcal{C}, \mathbf{T}_\mathcal{C}^\mathcal{W}$] $\in SE(2)\Leftarrow$ \Call{get\_tf}{$\PW C^1$}
     \State [$\PC N$, $\PC C$] $\Leftarrow$ \Call{apply\_tf}{$\PW N, \PW C, \mathbf{T}_\mathcal{W}^\mathcal{C}$}
       \While {$itr \leq itr_{max}$}
         \State $\PC N \Leftarrow$ \Call{FEM}{$\PC N$, ENV, $V_i^k$}
@@ -77,13 +88,7 @@ As shown in Fig.~\ref{fig:chap-4-model-schematic}, the simulation is displayed i
 \subsection{Experiment Methods and Hardware Components}
 \label{sec:chap-4-experiment-methods}
 
-To demonstrate the model's ability to match results from physical needle insertion experiments, a set of custom-created multi-layer tissue phantoms with different mechanical properties and geometrical features are developed. These phantoms, in addition to chicken breast tissues, are used for bevel needle insertion experiments, as shown in~\cref{fig:chap-4-robot}. Through a cone-beam computed tomography (CT) machine (Loop-X, BrainLab, Germany), scans of the needle after each insertion are obtained for needle shape reconstruction and to tune the model's parameters. Details of each step are presented in the following subsections.
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\columnwidth]{manuscripts/ICRA_2024/figures/setup.png}
-  \caption{Experiment setup used for validating the simulation.}
-  \label{fig:chap-4-robot}
-\end{figure}
+To demonstrate the model's ability to match results from physical needle insertion experiments, a set of custom-created multi-layer tissue phantoms with different mechanical properties and geometrical features are developed. These phantoms, in addition to chicken breast tissues, are used for bevel needle insertion experiments, as shown in~\cref{fig:chap-4-robot}. Through a cone-beam computed tomography (CT) machine (Loop-X, BrainLab, Germany), scans of the needle after each insertion are obtained for needle shape reconstruction and to tune the model's parameters. \added[id=rt]{To verify the simulator's ability to recreate curved insertion trajectories using a bevel-tip needle, in the current experiment setup shown in~\cref{fig:chap-4-robot}, the Z-and Y-DOFs provided by the linear stages are used only to position the needle with respect to the phantom, and only the X-DOF is used during needle insertion. Needle shape manipulation strategy shown in~\cref{fig:chap-4-model-schematic}, as well as control of needle bevel direction, are explored in~\cref{sec:chap-4-control} and~\cref{chap:chap-5}. }Details of each step are presented in the following subsections.
 
 \subsubsection{Tissue Phantoms}
 \label{sec:chap-4-developed-phantoms}
@@ -104,7 +109,14 @@ Phantom 1 consists of four layers of varied thicknesses and mechanical propertie
 \subsubsection{Hardware Setup}
 \label{sec:chap-4-hardware-setup}
 
-An 18 gauge, 15 cm long, notched biopsy needle (Cook Medical, USA) is employed for all experiments. To ensure a controlled needle insertion, a two-stage setup is used, as shown in~\cref{fig:chap-4-robot}. The needle is rigidly affixed to an XY linear stage (XY-6060, Danaher Precision Systems, USA), which is used to advance the needle forward and laterally. A Z linear stage (Model 12-1532, Dover Motion, USA) is used for adjusting the phantoms' vertical position to vary the type of tissue layers the needle can traverse and their effective thickness. The stages are secured on an acrylic plate, which also allows the positioning of the Z-stage at different angles. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\columnwidth]{manuscripts/ICRA_2024/figures/setup.png}
+  \caption{\added[id=rt]{Experiment setup used for validating the simulation.}}
+  \label{fig:chap-4-robot}
+\end{figure}
+
+An 18 gauge, 15 cm long, notched biopsy needle (Cook Medical, USA) is employed for all experiments. To ensure a controlled needle insertion, a two-stage setup is used, as shown in~\cref{fig:chap-4-robot}. The needle is rigidly affixed to an XY linear stage (XY-6060, Danaher Precision Systems, USA), which is used to advance the needle forward and laterally. A Z linear stage (Model 12-1532, Dover Motion, USA) is used for adjusting the phantoms' vertical position to vary the type of tissue layers the needle can traverse and their effective thickness. \deleted[id=rt]{The stages are secured on an acrylic plate, which also allows the positioning of the Z-stage at different angles.}
 
 In order to avoid optical distortions caused by the simulant material, CT scans with a voxel size of $0.46\times0.46\times0.46$~mm$^{3}$ are used to extract the needle's shape after each insertion, as well as the effective insertion depth. Intensity thresholding is applied to the acquired images to segment the needle in 3D; radiopaque markers are used to transform the reconstructed needle to the world-fixed frame $\mathcal{W}$ using the Iterative Closest Point algorithm. Knowing the relative position of the reconstructed needle with respect to the tissue phantom and the thickness of each layer of the phantom, the effective distance traversed by the needle on the bevel bending plane is calculated and used to reconstruct the tissue boundaries in our planar simulation.
 
@@ -384,7 +396,7 @@ Tissue parameters $\alpha$ and $\mu$, as well as contact point offset $b$ (see~\
 \subsection{Simulated Targeting Experiments}
 \label{sec:chap-4-targeting-experiments}
 
-Comparison between data-driven and mechanics-based needle controllers is carried out in the simulator. A total of 12 target points within the prostate phantom are selected (\cref{fig:chap-4-sub-second}), emulating a 12-core biopsy procedure. For each target, we compare the two controllers in both path-following and point-stabilization tasks, \textit{i.e.} retracing a desired needle tip path from entry to target, or reaching a target point without path guidance using only the start and end needle configurations.
+Comparison between data-driven and mechanics-based needle controllers is carried out in the \added[id=rt]{planar }simulator. A total of 12 target points within the prostate phantom are selected (\cref{fig:chap-4-sub-second}), emulating a 12-core biopsy procedure. For each target, we compare the two controllers in both path-following and point-stabilization tasks, \textit{i.e.} retracing a desired needle tip path from entry to target, or reaching a target point without path guidance using only the start and end needle configurations.
 
 The feasible paths for the needle tip are generated in the simulator through forward needle insertion (step \textcircled{1} in~\cref{fig:chap-4-schematic}). Upon reaching the target depth, the deflection of the needle tip is recorded and used as an initial offset at the entry point, such that by simply moving the needle in the $+x$-direction with zero initial slope, the needle tip reaches the selected target without $y$-axis adjustments.
 

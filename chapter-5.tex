@@ -3,7 +3,7 @@
 \section{Chapter Overview}
 \label{sec:chap-5-overview}
 
-Previously, we highlight the shortcomings of resolved-rate controllers in manipulating the shape of bevel-tip needles, including the reliance on obtaining an invertible input-output Jacobian, the importance of a feasible needle path, as well as the challenges for controlling the bevel direction. Here, we present a simulation-driven framework for both trajectory planning and tracking of bevel-tip needles under shape manipulation using cross-entropy optimization. We use a single position feedback located at the needle tip to provide feedback during online tracking. Controller performance under tracking uncertainty is evaluated both in a simulated environment as well as using tissue phantoms.
+Previously, \replaced[id=ak]{I}{we} highlight the shortcomings of resolved-rate controllers in manipulating the shape of bevel-tip needles, including the reliance on obtaining an invertible input-output Jacobian, the importance of a feasible needle path, as well as the challenges for controlling the bevel direction. Here, \replaced[id=ak]{I}{we} present a simulation-driven framework for both trajectory planning and tracking of bevel-tip needles under shape manipulation using cross-entropy optimization. \replaced{id=ak}{A}{We use a} single position feedback located at the needle tip \added[id=ak]{is used }to provide feedback during online tracking. Controller performance under tracking uncertainty is evaluated both in a simulated environment as well as using tissue phantoms.
 
 \section{Introduction}
 \label{sec:chap-5-introduction}
@@ -14,7 +14,7 @@ On the other hand, needle \textit{manipulation} allows more clinically relevant 
 
 Previous works in this domain focus primarily on resolved-rate control, which relies on inverting an input-output Jacobian obtained via either finite difference methods or Broyden's update law~\parencite{dimaioNeedleSteeringMotion2005, adagolodjoRoboticInsertionFlexible2019,bernardesDataDrivenAdaptiveNeedle2023,wangSituFlexibleNeedle2023,wangSimulationbasedFlexibleNeedle2024,wangShapeManipulationBevelTip2024}. However, since a Jacobian only locally approximates a nonlinear mapping, these controllers can generate potentially dangerous motions that lead to tissue tearing in the absence of a feasible path~\parencite{wangShapeManipulationBevelTip2024}. Others investigate in the case of bevel-tip needles how to combine lateral actuation with axial rotation for the sole purpose of keeping the needle on a straight line~\parencite{lehmannDeflectionModelingNeedle2017}, and they identified the phenomenon that lateral actuation has diminishing effect as the needle is embedded deeper into soft tissues; yet it remains to be seen how the two actions can be combined to reach arbitrary targets.
 
-Here, we show how sampling-based optimization algorithms are well suited in tackling needle manipulation planning and tracking problems for percutaneous interventions. These optimization algorithms are often employed when the system involves a high-dimensional state space and arbitrary cost functions~\parencite{kobilarovCrossEntropyMotionPlanning2012,petrovicCrossEntropyBasedStochastic2020,taoPathPlanningUncertain2022,suhFastSamplingBasedCostAware2017}. We demonstrate, in the case of a bevel-tip needle, how the cross entropy (CE) method can be readily coupled with a FE simulator for both planning and closed-loop control for needle-based percutaneous interventions~\parencite{wangBevelTipNeedleDeflection2024}, and how needle \textit{manipulation} can be used together with \textit{steering} to achieve a minimally invasive insertion. We also show how sparse positional feedback, such as electromagnetic (EM) tracking, can be integrated with the current framework to counter model uncertainty.
+Here, \replaced{I}{we} show how sampling-based optimization algorithms are well suited in tackling needle manipulation planning and tracking problems for percutaneous interventions. These optimization algorithms are often employed when the system involves a high-dimensional state space and arbitrary cost functions~\parencite{kobilarovCrossEntropyMotionPlanning2012,petrovicCrossEntropyBasedStochastic2020,taoPathPlanningUncertain2022,suhFastSamplingBasedCostAware2017}. \replaced[id=ak]{I}{We} demonstrate, in the case of a bevel-tip needle, how the cross entropy (CE) method can be readily coupled with a FE simulator for both planning and closed-loop control for needle-based percutaneous interventions~\parencite{wangBevelTipNeedleDeflection2024}, and how needle \textit{manipulation} can be used together with \textit{steering} to achieve a minimally invasive insertion. \replaced[id=ak]{I}{We} also show how sparse positional feedback, such as electromagnetic (EM) tracking, can be integrated with the current framework to counter model uncertainty.
 
 \section{Finite Element Simulator}
 \label{sec:chap-5-fe-simulator}
@@ -116,7 +116,7 @@ where $P_{tip} = [x_n, y_n]^{\top}$ and $P_{target} = [x_t, y_t]^{\top}$ denote 
   \label{eq:chap-5-ogden}
   \mc{W}(C) = \sum_{c \in C}w_c \frac{2\mu_c}{\alpha_c^2}\left( 2\lambda_{1,3}^{\alpha_c} + \lambda_2^{\alpha_c} - 3 \right),
 \end{equation}
-for each $c \in C$. Tissue parameters $\mu, \alpha$ are defined on a per-layer basis based on the location of contact points. Stretch ratios $\lambda_i$ are calculated at each contact point with respect to the corresponding needle deflection. Unconfined uniaxial compression is assumed and $\lambda_2$ is assigned as the principal stretch ratio. Constants $w_c$ are optional weighting factors for different tissue layers.
+for each $c \in C$. Tissue parameters $\mu, \alpha$ are defined on a per-layer basis based on the location of contact points. Stretch ratios $\lambda_i$ are calculated at each contact point with respect to the corresponding needle deflection. Unconfined uniaxial compression is assumed and $\lambda_2$ is assigned as the principal stretch ratio. Constants $w_c$ are optional weighting factors for different tissue layers. \added[id=rt]{Tissue property asymmetric caused by the presence of anatomical ``obstacles'' (circles in~\cref{fig:chap-5-two-plans}) are not taken into account in the current simulator.}
 
 The planning phase returns a minimally invasive trajectory $\bar{\pi}$ that consists of an optimal control sequence $\bar{U}$ and associated needle states $\bar{X}$. These nominal values are used to warm start the online trajectory tracking algorithm derived from the same CE framework. 
 
@@ -127,7 +127,14 @@ In this work, we focus on needle \textit{manipulation}, but we show in~\cref{sec
 \subsection{Online Trajectory Tracking}
 \label{sec:trajectory_tracking}
 
-To track the nominal trajectory subject to uncertainties in initial conditions and model parameters, the CE optimization framework is extended to establish a model predictive controller (MPC) for continuous input signal generation. Furthermore, an ``ad hoc'' bang-bang controller is introduced to switch the bevel tip direction.
+To track the nominal trajectory subject to uncertainties in initial conditions and model parameters, the CE optimization framework is extended to establish a model predictive controller (MPC) for continuous input signal generation. Furthermore, an ``ad hoc'' bang-bang controller is introduced to switch the bevel tip direction. \added[id=rt]{These two components form a hybrid trajectory tracking MPC, shown in~\cref{fig:chap-5-controller-diagram}.}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\columnwidth]{./figures/controller_diagram/controller_diagram.png}
+  \caption{\added[id=rt]{Diagram of control workflow and components of the online tracking model predictive controller (MPC). After a nominal plan $\bar{\pi}$ is returned, continuous input signals (i.e. $\left[ \delta b_x, \delta g_y \right]^{\top}$) go through the CE-MPC to generate continuous output, while binary signal (i.e. $flip$) is determined using the bang-bang controller.}}
+  \label{fig:chap-5-controller-diagram}
+\end{figure}
 
 \subsubsection{Model Predictive Controller}
 \label{sec:chap-5-mpc}
@@ -142,7 +149,7 @@ The nominal needle trajectory $\bar{X}$ contains not only the needle tip positio
 \end{equation}
 where $s^{\prime}dt \in \tau^{\prime} \subset \tau$, and $d \left( \cdot, \cdot \right)_W : SE(2)\times SE(2) \to \mb{R}^+$ assigns a cost to the deviation based on weight $W$.
 
-Contrary to planning, the MPC is only in charge of continuous input signals. Binary control signal, $flip$, is generated by a bang-bang controller derived from a kinematic model.
+Contrary to planning, the MPC is only in charge of continuous input signals\added[id=rt]{, which are $\left[ \delta b_x, \delta g_y \right]^{\top}$ in the current case}. Binary control signal, $flip$, is generated by a bang-bang controller derived from a kinematic model.
 
 \subsubsection{Kinematic-based Bang-Bang Controller}
 \label{sec:chap-5-kinematic-models}
@@ -191,11 +198,11 @@ As shown in~\cref{fig:chap-5-em-setup}, both the tip tracker and a reference tra
   \label{fig:chap-5-em-setup}
 \end{figure}
 
-Each 6-DOF reference tracker returns an indicator $\mc{I}$ from $0$ to $9.9$ to indicate field distortion. To find the correlation between measurement error and $\mc{I}$, we again use the linear stage to move the sensors on an $5 \times 5 \times 5$ square grid within a 1000 cm$^3$ volume, with $100$ position measurements collected at each grid point. The data collection process is repeated for 5 times, therefore a total of $500$ measurements are collected at each of $125$ grid points.
+\replaced[id=rt]{On the NDI Aurora software, e}{E}ach 6-DOF reference tracker returns \replaced[id=rt]{a unitless}{an} indicator $\mc{I}$ from $0$ to $9.9$ to indicate field distortion. To find the correlation between measurement error and $\mc{I}$, we again use the linear stage to move the sensors on an $5 \times 5 \times 5$ square grid within a 1000 cm$^3$ volume, with $100$ position measurements collected at each grid point. The data collection process is repeated for 5 times, therefore a total of $500$ measurements are collected at each of $125$ grid points.
 
 Furthermore, field distortion is purposefully introduced by placing a metal plate underneath the setup. We call this the \textit{noisy} environment (see~\cref{fig:chap-5-em-setup} and~\cref{fig:chap-5-indicator-value}). The results are shown in~\cref{tab:chap-5-sensor-pos-errors} and~\cref{tab:chap-5-sensor-ori-errors}.
 
-As shown in~\cref{tab:chap-5-sensor-pos-errors}, in the \textit{ideal} environment, the $rmse$ is consistent with the official product specifications~\parencite{AuroraNDIsPremier2024}. When noise is introduced, maximum displacement error increases to 4.36 mm, but \textit{jitter} remains relatively unchanged. Based on the magnitudes of $rmse$ and \textit{jitter}, we conclude that the main component of the EM noise is a displacement that is deterministic at a certain position in a certain environment, we call this $bias$.
+As shown in~\cref{tab:chap-5-sensor-pos-errors}, in the \textit{ideal} environment, the $rmse$ is consistent with the official product specifications~\parencite{AuroraNDIsPremier2024}. When \replaced[id=rt]{the metal plate}{noise} is introduced, maximum displacement error increases to 4.36 mm, but \textit{jitter} remains relatively unchanged. Based on the magnitudes of $rmse$ and \textit{jitter}, we conclude that the main component of the EM noise is a displacement that is deterministic at a certain position in a certain environment, we call this $bias$.
 
 \begin{table}[]
 \centering
@@ -308,9 +315,9 @@ We simulate a soft tissue environment where there are two nonlinear tissue layer
 
 In the simulation, the controller needs to manipulate the needle to follow a nominal trajectory.  Target positions range from $40$ mm to $60$ mm in depth, and $-5$ mm to $5$ mm in lateral position, with $5$ mm increments. For each target, a single trajectory is generated, and 40 insertions are performed to follow the same trajectory in each experimental condition. During online tracking, the needle is subject to random initial disturbances sampled from a standard Gaussian distribution. Since these initial disturbances can be measured preoperatively, they are also known by the \textit{estimated} model.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.68\columnwidth]{manuscripts/ISMR2025_Junling/figures/study_diagram.png}
+  \includegraphics[width=\columnwidth]{manuscripts/ISMR2025_Junling/figures/study_diagram.png}
   \caption{Simulation study workflow. $e$ denotes the actuating signal, which is the discrepancy between the nominal and estimated states, combined with the nominal control.}
   \label{fig:chap-5-simulator-diagram}
 \end{figure}
@@ -493,7 +500,14 @@ Needle insertion experiments using tissue phantoms are performed with hardware s
 \subsubsection{Plastisol Tissue Phantom}
 \label{sec:chap-5-plastisol}
 
-The plastisol tissue phantom used in this experiment is the same as in~\parencite{wangSimulationbasedFlexibleNeedle2024}. The phantom has two layers of different stiffness values: the superficial and deep layers are assigned Ogden model parameter $\mu_1 = 1.82$ kPa and $\mu_2 = 3.63$ kPa, respectively, with $\alpha = 8.74$ for both layers. A 21-gauge needle is used, with its Young's modulus is set to 200 GPa for stainless steel. The needle guide is positioned at $G=40$ mm with initial tip-to-skin distance of $28.5$ mm. Target depths are chosen to be from $25$ mm to $45$ mm with $5$ mm increments to simulate a lumbar injection scenario, where the average insertion depths is $36.7 \pm 9.9$ mm~\parencite{fritzAugmentedRealityVisualization2012}. With the needle initially aligned with $0$ mm lateral axis, we also target positions with $\pm 5$ mm lateral variations to simulate initial registration errors and misalignment. Fifteen targets in total are selected and ten insertions are performed on each target. 
+The plastisol tissue phantom used in this experiment is the same as in~\parencite{wangSimulationbasedFlexibleNeedle2024}. The phantom has two layers of different stiffness values: the superficial and deep layers are assigned Ogden model parameter $\mu_1 = 1.82$ kPa and $\mu_2 = 3.63$ kPa, respectively, with $\alpha = 8.74$ for both layers. A 21-gauge needle is used, with its Young's modulus is set to 200 GPa for stainless steel. The needle guide is positioned at $G=40$ mm with initial tip-to-skin distance of $28.5$ mm \added[id=rt]{(See~\cref{fig:chap-5-simulator-re})}. Target depths are chosen to be from $25$ mm to $45$ mm with $5$ mm increments to simulate a lumbar injection scenario, where the average insertion depths is $36.7 \pm 9.9$ mm~\parencite{fritzAugmentedRealityVisualization2012}. With the needle initially aligned with $0$ mm lateral axis, we also target positions with $\pm 5$ mm lateral variations to simulate initial registration errors and misalignment. Fifteen targets in total are selected and ten insertions are performed on each target. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.68\columnwidth]{manuscripts/RAL_2025/figures/schematic.png}
+  \caption{\Cref{fig:chap-5-simulator} reused.}
+  \label{fig:chap-5-simulator-re}
+\end{figure}
 
 \subsubsection{Real Tissue Phantom}
 \label{sec:chap--5-real-tissue}
