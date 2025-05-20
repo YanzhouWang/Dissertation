@@ -39,16 +39,31 @@ To simulate the needle's bevel effect during insertion, an offset $b$ is applied
 
 Known coordinates of the needle points can be used as control points along the needle, and are treated as essential boundary conditions for their corresponding node. For example, the needle base can have a known configuration that is robotically controlled, and the needle shaft can be constrained to move through a template.
 
-\added[id=rt]{To facilitate the explanation of our interactive simulator, meanings of variables used are summarized as follows:}
-\nomenclature{$H_{(\cdot)}^{(\cdot\cdot)}$, $V_{(\cdot)}^{(\cdot\cdot)}$}{The $(\cdot)th$ inputs to the needle at simulation step $(\cdot\cdot)$}
-\nomenclature{$\mathcal{W}, \mathcal{C}$}{World and contact frames}
-\nomenclature{$C$}{Contact point}
-\nomenclature{$N$}{Needle object}
-\nomenclature{$SE(2)$}{2D Special Euclidean group}
-\nomenclature{$x_{tip}, y_{tip}, \theta_{tip}$}{Needle tip $x, y$ and $\theta$ coordinates}
-\nomenclature{$\mathbf{T}_{(\cdot)}^{(\cdot\cdot)}$}{Rigid transformation from frame $(\cdot)$ to frame $(\cdot\cdot)$}
-\nomenclature{$\Omega_1$}{First tissue layer boundary}
-\printnomenclature[1.25in]
+\added[id=rt]{To facilitate the explanation of our interactive simulator, meanings of variables used are summarized in~\cref{tab:chap-4-list-of-symbols}:}
+% \nomenclature{$H_{(\cdot)}^{(\cdot\cdot)}$, $V_{(\cdot)}^{(\cdot\cdot)}$}{The $(\cdot)th$ inputs to the needle at simulation step $(\cdot\cdot)$}
+% \nomenclature{$\mathcal{W}, \mathcal{C}$}{World and contact frames}
+% \nomenclature{$C$}{Contact point}
+% \nomenclature{$N$}{Needle object}
+% \nomenclature{$SE(2)$}{2D Special Euclidean group}
+% \nomenclature{$x_{tip}, y_{tip}, \theta_{tip}$}{Needle tip $x, y$ and $\theta$ coordinates}
+% \nomenclature{$\mathbf{T}_{(\cdot)}^{(\cdot\cdot)}$}{Rigid transformation from frame $(\cdot)$ to frame $(\cdot\cdot)$}
+% \nomenclature{$\Omega_1$}{First tissue layer boundary}
+% \printnomenclature[1.25in]
+
+\begin{table}[]
+\caption{List of Symbols}
+\label{tab:chap-4-list-of-symbols}
+\begin{tabular}{cl}
+$\mathbf{T}_{(\cdot)}^{(\cdot\cdot)}$ & Rigid transformation from frame $(\cdot)$ to frame $(\cdot\cdot)$ \\
+$\mathcal{W}, \mathcal{C}$ & World and contact frames \\
+$\Omega_1$ & First tissue layer boundary \\
+$C$ & Contact point \\
+$H_{(\cdot)}^{(\cdot\cdot)}$, $V_{(\cdot)}^{(\cdot\cdot)}$ & The $(\cdot)th$ inputs to the needle at simulation step $(\cdot\cdot)$ \\
+$N$      & Needle object \\
+$SE(2)$  & 2D Special Euclidean group  \\
+$x_{tip}, y_{tip}, \theta_{tip}$ & $x, y$ and $\theta$ coordinates
+\end{tabular}
+\end{table}
 
 \added[id=rt]{As shown in~\cref{fig:chap-4-model-schematic}, }to create an interactive simulation \added[id=rt]{that captures a variety of needle manipulations}, we distinguish two types of user inputs: ``vertical'' $V$-input and ``horizontal'' $H$-input. $V$-input is a condition that directly affects the needle's shape, such as nodal lateral displacement or slope of a particular point on the needle, and is treated similarly to essential boundary conditions of the finite element solver. $H$-input pertains only to needle insertion and retraction, and this kinematic problem is solved independently from the beam-bending problem. 
 
