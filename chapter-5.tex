@@ -189,7 +189,7 @@ EM sensors are vulnerable to field distortions introduced by common robotic comp
 \subsection{EM Noise and Accuracy Evaluation}
 \label{sec:chap-5-em-evaluation}
 
-As shown in~\cref{fig:chap-5-em-setup}, both the tip tracker and a reference tracker are fixed onto a motorized linear stage. After calculating the measurement error, a minimum distance of $70$ cm between the field generator and the linear stage is found sufficient to achieve an overall root mean square error (rmse) of $0.17$ mm and $0.25$ mm for the two sensors, respectively, which are lower than the manufacturer-reported rmse of $0.70$ mm and $0.48$ mm~\parencite{AuroraNDIsPremier2024}. The reason for the accuracy of the tip being higher than that of the reference can be attributed to the needle tip being closer to the field generator in the setup~\parencite{nakamotoMagnetoOpticHybrid3D2000}. We call this the \textit{ideal} environment (see~\cref{fig:chap-5-indicator-value}).
+As shown in~\cref{fig:chap-5-em-setup}, both the tip tracker and a reference tracker are fixed onto a motorized linear stage. After calculating the measurement error, a minimum distance of $70$ cm between the field generator and the linear stage is found sufficient to achieve an overall root mean square error (rmse) of $0.17$ mm and $0.25$ mm for the two sensors, respectively, which are lower than the manufacturer-reported rmse of $0.70$ mm and $0.48$ mm\footnote{\url{https://web.archive.org/web/20240303164417/https://www.ndigital.com/electromagnetic-tracking-technology/aurora/}}. The reason for the accuracy of the tip being higher than that of the reference can be attributed to the needle tip being closer to the field generator in the setup~\parencite{nakamotoMagnetoOpticHybrid3D2000}. We call this the \textit{ideal} environment (see~\cref{fig:chap-5-indicator-value}).
 
 \begin{figure}[h]
   \centering
@@ -202,7 +202,7 @@ As shown in~\cref{fig:chap-5-em-setup}, both the tip tracker and a reference tra
 
 Furthermore, field distortion is purposefully introduced by placing a metal plate underneath the setup. We call this the \textit{noisy} environment (see~\cref{fig:chap-5-em-setup} and~\cref{fig:chap-5-indicator-value}). The results are shown in~\cref{tab:chap-5-sensor-pos-errors} and~\cref{tab:chap-5-sensor-ori-errors}.
 
-As shown in~\cref{tab:chap-5-sensor-pos-errors}, in the \textit{ideal} environment, the $rmse$ is consistent with the official product specifications~\parencite{AuroraNDIsPremier2024}. When \replaced[id=rt]{the metal plate}{noise} is introduced, maximum displacement error increases to 4.36 mm, but \textit{jitter} remains relatively unchanged. Based on the magnitudes of $rmse$ and \textit{jitter}, we conclude that the main component of the EM noise is a displacement that is deterministic at a certain position in a certain environment, we call this $bias$.
+As shown in~\cref{tab:chap-5-sensor-pos-errors}, in the \textit{ideal} environment, the $rmse$ is consistent with the official product specifications. When \replaced[id=rt]{the metal plate}{noise} is introduced, maximum displacement error increases to 4.36 mm, but \textit{jitter} remains relatively unchanged. Based on the magnitudes of $rmse$ and \textit{jitter}, we conclude that the main component of the EM noise is a displacement that is deterministic at a certain position in a certain environment, we call this $bias$.
 
 \begin{table}[]
 \centering
@@ -519,7 +519,7 @@ The needle guide is positioned roughly at $G=20$ mm with initial tip-to-skin dis
 \subsection{Results and Discussion}
 \label{sec:chap-5-results-and-discussion}
 
-The performance of the proposed needle manipulation strategy is evaluated based on targeting error, $\Vert P_{tip} - P_{target}\Vert_2$, as reported by the EM tracking system\footnote{https://github.com/YanzhouWang/needle\_manipulation\_data}. The average targeting error is $0.16 \pm 0.29$ mm inside the plastisol phantom, and $0.22 \pm 0.78$ mm inside chicken breasts. The reported depths and associated error magnitudes are appropriate for image-guided procedures such as lumbar facet joint injections and lung biopsies, based on geometric constraint of anatomical targets and desirability of high targeting accuracy~\cite{simonVivoTopographicAnalysis2012, anzideiImagingGuidedChestBiopsies2017}. A plot of the targets and associated error map is presented in~\cref{fig:chap-5-em-error}.
+The performance of the proposed needle manipulation strategy is evaluated based on targeting error, $\Vert P_{tip} - P_{target}\Vert_2$, as reported by the EM tracking system\footnote{\url{https://github.com/YanzhouWang/needle\_manipulation\_data}}. The average targeting error is $0.16 \pm 0.29$ mm inside the plastisol phantom, and $0.22 \pm 0.78$ mm inside chicken breasts. The reported depths and associated error magnitudes are appropriate for image-guided procedures such as lumbar facet joint injections and lung biopsies, based on geometric constraint of anatomical targets and desirability of high targeting accuracy~\cite{simonVivoTopographicAnalysis2012, anzideiImagingGuidedChestBiopsies2017}. A plot of the targets and associated error map is presented in~\cref{fig:chap-5-em-error}.
 
 \begin{figure}[h]
   \centering
